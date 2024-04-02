@@ -1,9 +1,9 @@
 import { Request, Response } from "express";
-import { signupSchema } from "../validations";
-import User from "../models/User";
+import { signupSchema } from "../../utils/validations";
+import User from "../../models/User";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
-import { signupBody } from "../types";
+import { signupBody } from "../../utils/types";
 
 const userSignupController = async (
   req: Request<{}, {}, signupBody>,
@@ -47,13 +47,13 @@ const userSignupController = async (
 
     // creating jwt token
     const userId = user._id;
-    const jwtSecret = process.env.JWT_SECRET || 'defaultsecret'
+    const jwtSecret = process.env.JWT_SECRET || "defaultsecret";
     const token = jwt.sign({ userId }, jwtSecret);
     return res.json({
       message: "User created successfully",
       token,
     });
-  } catch (error:any) {
+  } catch (error: any) {
     return res.status(500).json({ message: error.message });
   }
 };

@@ -6,3 +6,8 @@ export const signupSchema = zod.object({
   firstName: zod.string().trim().min(2),
   lastName: zod.string().trim().min(2),
 });
+
+export const signinSchema = zod.object({
+  email: zod.string().trim().email(),
+  password: zod.string().trim().min(6),
+});
