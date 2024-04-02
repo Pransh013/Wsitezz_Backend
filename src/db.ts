@@ -1,8 +1,8 @@
 import mongoose from "mongoose";
 
 const connectToDatabase = () => {
-
-  mongoose.connect(process.env.MONGO_URI!);
+  const mongoUri = process.env.MONGO_URI || "mongodb://localhost:27017/testDB"
+  mongoose.connect(mongoUri);
   mongoose.connection.once("open", () => {
     console.log("Successfully connected to database");
   });
